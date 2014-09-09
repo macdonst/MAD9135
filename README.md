@@ -6,5 +6,4 @@ Teacher
 
 Simon MacDonald - macdonst
 
-Students
 ========
