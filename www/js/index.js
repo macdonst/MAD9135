@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        app.downloadBooks();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,5 +46,22 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    downloadBooks: function() {
+        console.log("calling xhr");
+        var request = XMLHttpRequest();
+        request.open("GET", 
+            "https://dl.dropboxusercontent.com/u/887989/MAD9135/2014-09-09/books.small.json", true);
+        request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+                if (request.status == 200 || request.status == 0) {
+                    var books = JSON.parse(request.responseText);
+                    for (var i = 0; i < books.length; i++) {
+                        console.log(books[i].Title);
+                    }
+                }
+            }
+        };
+        request.send();
     }
 };
