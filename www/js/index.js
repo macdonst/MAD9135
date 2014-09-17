@@ -37,11 +37,21 @@ var app = {
 		app.locateMe();
     },
 	
-	locateMe: function(){
-		alert("Working");
+	locateMe: function() {
+		alert("working");
+		navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+
+		function successCallback(position) {
+			var msg = "You are at latitude = " + position.coords.latitude + 
+						" longitude = " + position.coords.longitude;
+			alert(msg);
+		}
+
+		function errorCallback(error) {
+		  alert(error.code);
+		}
 		
 	},
-	
 	
     // Update DOM on a Received Event
     receivedEvent: function(id) {
