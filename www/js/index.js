@@ -27,6 +27,8 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        var whereBtn = document.getElementById("whereami");
+        whereBtn.addEventListener('click', this.whereami, false);
     },
     // deviceready Event Handler
     //
@@ -45,5 +47,36 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    whereami: function() {
+        console.log('whereami');
+        var success = function(position) {
+            console.log(JSON.stringify(position));
+            app.whatcity(position);
+        };
+        var failure = function() {
+            console.log("error");
+        };
+        navigator.geolocation.getCurrentPosition(success, failure, {
+            enableHighAccuracy: true
+        });
+    },
+    whatcity: function(position) {
+        console.log('whatcity');
+        var request = XMLHttpRequest();
+        request.open("GET", 
+            "http://open.mapquestapi.com/geocoding/v1/reverse?key=Fmjtd|luur2hurn0%2Cbg%3Do5-9wasly&location=" +
+            position.coords.latitude + "," + position.coords.longitude, true);
+        request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+                if (request.status == 200 || request.status == 0) {
+                    console.log(request.responseText);
+                    var obj = JSON.parse(request.responseText);
+                    var city = document.getElementById("city");
+                    city.value = obj.results[0].locations[0].adminArea5;
+                }
+            }
+        };
+        request.send();
     }
 };

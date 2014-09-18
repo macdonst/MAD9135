@@ -23,17 +23,27 @@
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <meta name="msapplication-tap-highlight" content="no" />
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div class="topcoat-navigation-bar">
+            <div class="topcoat-navigation-bar__item center full">
+                <h1 class="topcoat-navigation-bar__title">Geolocation Demo</h1>
             </div>
+        </div>
+        <div class="app">
+            <p>
+                <button class="topcoat-button--large--cta" id="whereami">Where am I?</button>
+            </p>
+            <p>
+                <label>
+                    <h2>City</h2>
+                    <input class="topcoat-text-input--large" value="" id="city"/>
+                </label>
+            </p>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
