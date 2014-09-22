@@ -36,6 +36,12 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        document.addEventListener('online', function() {
+            alert('online');
+        }, false);
+        document.addEventListener('offline', function() {
+            alert('offline');
+        }, false);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
