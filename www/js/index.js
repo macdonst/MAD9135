@@ -39,20 +39,34 @@ var app = {
 	
 	locateMe: function() {
 		alert("working");
-		navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+		navigator.geolocation.getCurrentPosition(successCallback, errorCallback, 
+							{
+								enableHighAccuracy: true,
+								timeout: 5000
+						});
 
 		function successCallback(position) {
 			var msg = "You are at latitude = " + position.coords.latitude + 
-						" longitude = " + position.coords.longitude;
+				" longitude = " + position.coords.longitude;
 			alert(msg);
+			
+			display_info(position.coords.longitude , position.coords.latitude);
 		}
 
 		function errorCallback(error) {
 		  alert(error.code);
 		}
 		
+		function display_info( lat , long){
+			alert("Hello"+lat+long);
+			
+			document.getElementById("location").innerHTML = "<p> Latitude = "+lat+"Longitude = "+long+"</p>";
+			
+		}
+		
 	},
 	
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
